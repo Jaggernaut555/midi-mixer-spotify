@@ -12,6 +12,8 @@ let settings: Record<string, any>;
 
 // Remember the last device spotify was using. Without this after like 15 seconds of spotify being paused you can no longer control it.
 let recentDevice: string;
+// Don't overwrite local changes during the time it takes to sync changes between local and remote settings
+let updated = false;
 
 // Spotify api rate limit is 2000 requests/hour per application
 // This may require changing the volume refreshing
@@ -30,16 +32,50 @@ async function initVolume() {
   });
 
   volumeAssignment.on("volumeChanged", async (level: number) => {
-    await spotifyReq(async () => {
-      volumeAssignment.volume = level;
-      await spotifyApi.setVolume(Math.floor(level * 100), { device_id: recentDevice });
-    }, false, false);
+    updated = true;
+    volumeAssignment.volume = level;
+    if (!volumeAssignment.muted) {
+      await spotifyReq(async () => {
+        volumeAssignment.volume = level;
+        await spotifyApi.setVolume(Math.floor(level * 100), { device_id: recentDevice });
+      }, false, false);
+    }
   });
 
-  await spotifyReq(async (res) => {
-    if (res && res.body && res.body.device && res.body.device.volume_percent) {
-      volumeAssignment.volume = res.body.device.volume_percent / 100;
+  volumeAssignment.on("mutePressed", async () => {
+    updated = true;
+    if (volumeAssignment.muted) {
+      volumeAssignment.muted = false;
+      await spotifyReq(async () => {
+        let level = Math.floor(volumeAssignment.volume * 100)
+        await spotifyApi.setVolume(level, { device_id: recentDevice });
+        updated = true;
+      }, false, false);
     }
+    else {
+      volumeAssignment.muted = true;
+      await spotifyReq(async () => {
+        await spotifyApi.setVolume(0, { device_id: recentDevice });
+        updated = true;
+      }, false, false);
+    }
+  });
+
+  const receiveVolume = (res: Response<SpotifyApi.CurrentPlaybackResponse>) => {
+    if (res && res.body && res.body.device && res.body.device.volume_percent !== null) {
+      let level = res.body.device.volume_percent / 100
+      if (level != 0) {
+        volumeAssignment.muted = false;
+        volumeAssignment.volume = level;
+      }
+      else if (!volumeAssignment.muted) {
+        volumeAssignment.emit("mutePressed");
+      }
+    }
+  }
+
+  await spotifyReq(async (res) => {
+    receiveVolume(res);
   }, true);
 
   // If there's no device id then the api doesn't know where to play
@@ -48,9 +84,11 @@ async function initVolume() {
     spotifyReq(async (res) => {
       if (res && res.body && res.body.is_playing && res.body.device) {
         recentDevice = res.body.device.id ?? recentDevice;
-        if (res.body.device.volume_percent !== null) {
-          volumeAssignment.volume = res.body.device.volume_percent / 100;
+        if (updated) {
+          updated = false;
+          return;
         }
+        receiveVolume(res);
       }
       else {
         // There is no current or recently playing device
