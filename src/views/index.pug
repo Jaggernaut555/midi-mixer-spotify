@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    title= 'Midi Mixer Spotify Plugin'
+  body
+    if user
+      h2 Your credentials for the plugin, #{user.displayName}. Don't leak them.
+      script.
+        var toggleCredentials = function () {
+          let el = document.getElementById("Credentials");
+          if (el.style.display === "none") {
+            el.style.display = "block";
+          }
+          else {
+            el.style.display = "none";
+          }
+        }
+      div
+        button(onclick='toggleCredentials()') Show Credentials
+        div(id="Credentials" style="display: none;")
+          p Access Token:
+            br
+            | #{user.accessToken}
+          p Refresh Token:
+            br
+            | #{user.refreshToken}
+    else
+      a(href="/auth/spotify") Login with Spotify

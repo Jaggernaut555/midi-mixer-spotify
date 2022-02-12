@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/midi-mixer-plugin/plugin.schema.json",
+  "version": "1.0.0",
+  "id": "ca.jaggernaut.midi-mixer.spotify",
+  "name": "Spotify",
+  "type": "node",
+  "main": "lib/index.js",
+  "icon": "circle.ico",
+  "settings": {
+    "ClientID": {
+      "label": "Client ID",
+      "type": "text",
+      "fallback": "None",
+      "required": true
+    },
+    "ClientSecret": {
+      "label": "Client Secret",
+      "type": "password",
+      "fallback": "None",
+      "required": true
+    },
+    "AccessToken": {
+      "label": "Access Token",
+      "type": "password",
+      "fallback": "None"
+    },
+    "RefreshToken": {
+      "label": "Refresh Token",
+      "type": "password",
+      "fallback": "None"
+    },
+    "expressStatus": {
+      "label": "Express server status",
+      "type": "status",
+      "fallback": "Not Running"
+    },
+    "runLogin": {
+      "label": "Run Login Server",
+      "type": "button"
+    }
+  },
+  "author": "Jaggernaut"
+}
