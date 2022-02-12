@@ -14,7 +14,8 @@
     "build": "tsc && npm run copy",
     "semantic-release": "semantic-release",
     "postversion": "npx ts-node scripts/bump-manifest.ts && midi-mixer pack",
-    "pack": "midi-mixer pack"
+    "pack": "midi-mixer pack",
+    "test": "node lib/index.js"
   },
   "license": "ISC",
   "devDependencies": {
@@ -41,7 +42,7 @@
   "dependencies": {
     "express": "^4.17.2",
     "express-session": "^1.17.2",
-    "midi-mixer-plugin": "^0.4.0",
+    "midi-mixer-plugin": "^1.0.1",
     "passport": "^0.5.2",
     "passport-spotify": "^2.0.0",
     "pug": "^3.0.2",
