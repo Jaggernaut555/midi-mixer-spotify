@@ -4,6 +4,8 @@ Control spotify volume, skip tracks, play/pause, and add the current playing tra
 
 # This will only work with a spotify premium account
 
+This will also not play spotify music directly. It it made to control the spotify app. The app is still needed to be running/playing music.
+
 # Setting up this plugin
 
 You can open up these steps in a web browser [on the github repo](https://github.com/Jaggernaut555/midi-mixer-spotify/blob/main/README.md#setting-up-this-plugin)
