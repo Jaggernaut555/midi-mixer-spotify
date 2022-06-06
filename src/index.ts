@@ -131,7 +131,12 @@ function initButtons() {
   });
   previousButton.on("pressed", async () => {
     spotifyReq(async (res) => {
-      await spotifyApi.skipToPrevious({ device_id: recentDevice });
+      if (res.body.progress_ms !== null && res.body.progress_ms < 3000) {
+        await spotifyApi.skipToPrevious({ device_id: recentDevice });
+      }
+      else {
+        await spotifyApi.seek(0);
+      }
     });
   });
 
