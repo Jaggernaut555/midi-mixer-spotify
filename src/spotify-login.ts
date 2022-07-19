@@ -7,7 +7,7 @@ import { Strategy } from 'passport-spotify';
 let clientId = "";
 let clientSecret = "";
 const SESSION_SECRET = 'Not important here';
-const CALLBACK_URL = 'http://localhost:3000/auth/spotify/callback';
+const CALLBACK_URL = 'http://localhost:22025/auth/spotify/callback';
 
 let settings: Record<string, any>;
 
@@ -20,7 +20,7 @@ export async function initLoginServer() {
 
 function initExpress() {
     const app = express()
-    const port = 3000
+    const port = 22025
     app.set("view engine", "pug");
     app.set("views", __dirname + '/views');
 
