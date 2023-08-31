@@ -4,7 +4,7 @@ Control spotify volume, skip tracks, play/pause, and add the current playing tra
 
 # This will only work with a spotify premium account
 
-This will also not play spotify music directly. It it made to control the spotify app. The app is still needed to be running/playing music.
+This will also not play spotify music directly. It is made to control the spotify app. The app is still needed to be running/playing music.
 
 # Setting up this plugin
 
