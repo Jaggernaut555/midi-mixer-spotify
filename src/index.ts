@@ -100,7 +100,7 @@ async function initVolume() {
 function initButtons() {
 
   const playPauseButton = new ButtonType("PlayPauseButton", {
-    name: "Play/Pause Button",
+    name: "Spotify: Play/Pause Button",
     active: true,
   });
 
@@ -116,7 +116,7 @@ function initButtons() {
   });
 
   const nextButton = new ButtonType("NextButton", {
-    name: "Next Button",
+    name: "Spotify: Next Button",
     active: true,
   });
   nextButton.on("pressed", async () => {
@@ -126,7 +126,7 @@ function initButtons() {
   });
 
   const previousButton = new ButtonType("PreviousButton", {
-    name: "Previous Button",
+    name: "Spotify: Previous Button",
     active: true,
   });
   previousButton.on("pressed", async () => {
@@ -141,7 +141,7 @@ function initButtons() {
   });
 
   const saveTrackButton = new ButtonType("SaveTrackButton", {
-    name: "Save Track",
+    name: "Spotify: Save Track",
     active: true,
   });
   saveTrackButton.on("pressed", () => {
