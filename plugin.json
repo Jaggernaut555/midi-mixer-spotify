@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/midi-mixer-plugin/plugin.schema.json",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "id": "ca.jaggernaut.midi-mixer.spotify",
   "name": "Spotify",
   "type": "node",
