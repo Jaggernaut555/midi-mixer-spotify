@@ -40,9 +40,9 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "midi-mixer-plugin": "^1.0.1",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
-    "midi-mixer-plugin": "^1.0.1",
     "passport": "^0.5.2",
     "passport-spotify": "^2.0.0",
     "pug": "^3.0.2",

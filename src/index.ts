@@ -207,12 +207,12 @@ async function spotifyReq(f: (res: Response<SpotifyApi.CurrentPlaybackResponse>)
   }
 }
 
-async function init() {
+export async function initSpotifyPlugin(): Promise<void> {
   settings = await $MM.getSettings();
-  clientId = settings["ClientID"];
-  clientSecret = settings["ClientSecret"];
-  accessToken = settings["AccessToken"];
-  refreshToken = settings["RefreshToken"];
+  clientId = settings["SpotifyClientID"];
+  clientSecret = settings["SpotifyClientSecret"];
+  accessToken = settings["SpotifyAccessToken"];
+  refreshToken = settings["SpotifyRefreshToken"];
 
   if (!clientId || !clientSecret) {
     log.error("Cannot function without client ID or Secret");
@@ -235,8 +235,8 @@ async function init() {
   initButtons();
 }
 
-$MM.onSettingsButtonPress("runLogin", () => {
+$MM.onSettingsButtonPress("SpotifyRunLogin", () => {
   initLoginServer();
-})
+});
 
-init();
+initSpotifyPlugin();

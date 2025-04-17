@@ -7,34 +7,34 @@
   "main": "lib/index.js",
   "icon": "circle.ico",
   "settings": {
-    "ClientID": {
+    "SpotifyClientID": {
       "label": "Client ID",
       "type": "text",
       "fallback": "None",
       "required": true
     },
-    "ClientSecret": {
+    "SpotifyClientSecret": {
       "label": "Client Secret",
       "type": "password",
       "fallback": "None",
       "required": true
     },
-    "AccessToken": {
+    "SpotifyAccessToken": {
       "label": "Access Token",
       "type": "password",
       "fallback": "None"
     },
-    "RefreshToken": {
+    "SpotifyRefreshToken": {
       "label": "Refresh Token",
       "type": "password",
       "fallback": "None"
     },
-    "expressStatus": {
+    "SpotifyExpressStatus": {
       "label": "Express server status",
       "type": "status",
       "fallback": "Not Running"
     },
-    "runLogin": {
+    "SpotifyRunLogin": {
       "label": "Run Login Server",
       "type": "button"
     }
